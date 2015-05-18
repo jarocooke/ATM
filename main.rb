@@ -16,31 +16,40 @@ class String
 	end
 end
 
+my_machine = Machine.new
+
+my_machine.load_account_details('bank_account_details.txt')
+
+open_account = Bank_account.new(my_machine.account_details)
+
+
+
+
 #Load account details from file
-account_details = []
-if File.exist?('bank_account_details.txt') == true
-	io_file = File.open('bank_account_details.txt', 'r')
-	io_file.each_line do |line|
-		account_details << line.chomp
-	end
-	io_file.close
-else
-	io_file = File.open('bank_account_details.txt', 'w+')
-end
+#account_details = []
+#if File.exist?('bank_account_details.txt') == true
+#	io_file = File.open('bank_account_details.txt', 'r')
+#	io_file.each_line do |line|
+#		account_details << line.chomp
+#	end
+#	io_file.close
+#else
+#	io_file = File.open('bank_account_details.txt', 'w+')
+#end
 
 #debugger
 
 #Default info if file doesn't exist
-if account_details == []
-	account_details[0] = "J Cooke"
-	account_details[1] = "04-98-27"
-	account_details[2] = "87302945"
-	account_details[3] = "100.00"
-	account_details[4] = "1111"
-end
+#if account_details == []
+#	account_details[0] = "J Cooke"
+#	account_details[1] = "04-98-27"
+#	account_details[2] = "87302945"
+#	account_details[3] = "100.00"
+#	account_details[4] = "1111"
+#end
 
 #Create Bank_account object
-open_account = Bank_account.new(account_details[0], account_details[1], account_details[2], account_details[3], account_details [4])
+#open_account = Bank_account.new(account_details[0], account_details[1], #account_details[2], account_details[3], account_details [4])
 
 #Check users PIN
 puts "Please enter your PIN or C)ancel"

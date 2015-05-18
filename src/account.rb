@@ -2,12 +2,12 @@
 class Bank_account
 	attr_accessor :account_name, :sort_code, :account_number, :balance, :pin
 	
-	def initialize(account_name, sort_code, account_number, balance, pin)
-		@account_name = account_name
-		@sort_code = sort_code
-		@account_number = account_number
-		@balance = balance
-		@pin = pin
+	def initialize(account_info)
+		@account_name = account_info[0]
+		@sort_code = account_info[1]
+		@account_number = account_info[2]
+		@balance = account_info[3]
+		@pin = account_info[4]
 	end
 	
 	def show_balance
