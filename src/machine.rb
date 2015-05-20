@@ -27,6 +27,12 @@ class Machine
 		account_details[4] = "1111"
 	end
 	
+	def write_account_details_to_file(account, account_info)
+		io_file = File.open(account, 'w+')
+		io_file.write("#{account_info[0]}\n#{account_info[1]}\n#{account_info[2]}\n#{account_info[3]}\n#{account_info[4]}")
+		io_file.close
+	end
+	
 #	def create_account_obj
 #		open_account = Bank_account.new(account_details[0], account_details[1], account_details[2], account_details[3], account_details[4])
 #	end

@@ -16,9 +16,13 @@ class String
 	end
 end
 
+
+
 my_machine = Machine.new
 
-my_machine.load_account_details('bank_account_details.txt')
+account_file = 'bank_account_details.txt'
+
+my_machine.load_account_details(account_file)
 
 open_account = Bank_account.new(my_machine.account_details)
 
@@ -94,8 +98,12 @@ end
 
 
 #Write new account details to file
-io_file = File.open('bank_account_details.txt', 'w+')
-io_file.write("#{open_account.account_name}\n#{open_account.sort_code}\n#{open_account.account_number}\n#{open_account.balance}\n#{open_account.pin}")
-io_file.close
+
+my_machine.write_account_details_to_file(account_file, open_account.populate_account_details(my_machine.account_details))
+
+
+#io_file = File.open('bank_account_details.txt', 'w+')
+#io_file.write("#{open_account.account_name}\n#{open_account.sort_code}\n#{open_account.account_number}\n#{open_account.balance}\n#{open_account.pin}")
+#io_file.close
 
 
