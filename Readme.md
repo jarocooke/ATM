@@ -1,0 +1,1 @@
+A simple text based program to emulate the function of an ATM.

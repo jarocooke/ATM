@@ -41,18 +41,18 @@ end
 $user_option = :continue
 while $user_option != :q
 	if $user_option == :continue
-		puts "B)alance   D)eposit   W)ithdraw   Q)uit"
+		my_machine.print_options
 		$user_option = gets.chomp.downcase.to_sym
 	end
 	if $user_option == :b
 		my_machine.print_balance
 		$user_option = :continue
 	elsif $user_option == :d
-		open_account.deposit_funds
-		open_account.show_balance
+		my_machine.deposit_funds
+		my_machine.print_balance
 	elsif $user_option == :w
-		open_account.withdraw_funds
-		open_account.show_balance
+		my_machine.withdraw_funds
+		my_machine.print_balance
 	elsif $user_option != :q
 		puts "Not a valid command, please try again."
 		$user_option = :continue
@@ -61,12 +61,7 @@ end
 
 
 #Write new account details to file
-
 my_machine.write_account_details_to_file(account_file)
 
-
-#io_file = File.open('bank_account_details.txt', 'w+')
-#io_file.write("#{open_account.account_name}\n#{open_account.sort_code}\n#{open_account.account_number}\n#{open_account.balance}\n#{open_account.pin}")
-#io_file.close
 
 

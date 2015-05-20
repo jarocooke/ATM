@@ -47,15 +47,62 @@ class Machine
 	end
 	
 	def request_pin
-		pin_message
-		user_pin = gets.chomp
+		if @pin_counter < 3
+			pin_message
+			user_pin = gets.chomp
+		else
+			user_pin = "q"
+		end
 		@pin_counter += 1
-		user_pin = "q" if @pin_counter == 3
 		return user_pin
 	end
 	
 	def return_pin
 		open_account.pin
+	end
+	
+	
+	
+	def withdraw_funds
+		puts "Enter amount to withdraw"
+		amount = gets.chomp
+		if amount.valid_float?
+			amount = amount.to_f
+			if amount > 0 && open_account.check_withdrawal(amount)
+				open_account.withdraw(amount)
+			elsif amount == 0
+				puts "You can\'t withdraw zero, please try again"
+			elsif amount < 0
+				puts "You can\'t withdraw a negative amount, please try again"
+			elsif check_withdrawal(amount) == false
+				puts "You don\'t have sufficient funds to make the withdrawal"
+			end
+		else
+			puts "You must enter a number for examle \"10.00\", please try again"
+		end
+	end
+	
+	def deposit_funds
+		puts "Enter amount to deposit"
+		amount = gets.chomp
+		if amount.valid_float?
+			amount = amount.to_f
+			if amount > 0
+				open_account.deposit(amount)
+			elsif amount == 0
+				puts "You can\'t deposit zero, please try again"
+			elsif amount < 0
+				puts "You can\'t deposit a negative amount, please try again"
+			end
+		else
+			puts "You must enter a number for examle \"10.00\", please try again"
+		end
+	end
+	
+	
+	
+	def print_options
+		puts "B)alance   D)eposit   W)ithdraw   Q)uit"
 	end
 	
 	def print_balance
