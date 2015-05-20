@@ -56,7 +56,8 @@ class Bank_account
 		end
 	end
 	
-	def populate_account_details(account_info)
+	def populate_account_details
+		account_info = []
 		account_info[0] = @account_name
 		account_info[1] = @sort_code
 		account_info[2] = @account_number

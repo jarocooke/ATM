@@ -99,7 +99,7 @@ end
 
 #Write new account details to file
 
-my_machine.write_account_details_to_file(account_file, open_account.populate_account_details(my_machine.account_details))
+my_machine.write_account_details_to_file(account_file, open_account.populate_account_details)
 
 
 #io_file = File.open('bank_account_details.txt', 'w+')
