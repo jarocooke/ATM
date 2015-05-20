@@ -66,4 +66,8 @@ class Bank_account
 		return account_info
 	end
 	
+	def details
+		return "#{account_name}\n#{sort_code}\n#{account_number}\n#{balance}\n#{pin}"
+	end
+	
 end
