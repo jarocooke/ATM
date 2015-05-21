@@ -61,8 +61,6 @@ class Machine
 		open_account.pin
 	end
 	
-	
-	
 	def withdraw_funds
 		puts "Enter amount to withdraw"
 		amount = gets.chomp
@@ -99,8 +97,6 @@ class Machine
 		end
 	end
 	
-	
-	
 	def print_options
 		puts "B)alance   D)eposit   W)ithdraw   Q)uit"
 	end
@@ -108,6 +104,5 @@ class Machine
 	def print_balance
 		open_account.show_balance
 	end
-	
 
 end

@@ -32,16 +32,6 @@ class Bank_account
 		amount <= @balance.to_f
 	end
 	
-#	def populate_account_details
-#		account_info = []
-#		account_info[0] = @account_name
-#		account_info[1] = @sort_code
-#		account_info[2] = @account_number
-#		account_info[3] = @balance
-#		account_info[4] = @pin
-#		return account_info
-#	end
-	
 	def details
 		return "#{account_name}\n#{sort_code}\n#{account_number}\n#{balance}\n#{pin}"
 	end
