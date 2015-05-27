@@ -2,12 +2,14 @@
 require_relative 'account'
 
 class Machine
-	attr_accessor :account_details, :open_account
+	attr_accessor :account_details#, :open_account
 	
-	def initialize
+	def initialize(account_file)
 		@account_details = []
 		@pin_counter = 0
+		@account_file = account_file
 		#@open_account = open_account
+		load_account_details
 	end
 
 	def load_default_account_details
@@ -18,23 +20,23 @@ class Machine
 		account_details[4] = "1111"
 	end
 
-	def load_account_details(account)
-		if File.exist?(account)
-			io_file = File.open(account, 'r')
+	def load_account_details
+		if File.exist?(@account_file)
+			io_file = File.open(@account_file, 'r')
 			io_file.each_line do |line|
 				account_details << line.chomp
 			end
 			io_file.close
 		else
-			io_file = File.open(account, 'w+')
+			io_file = File.open(@account_file, 'w+')
 			load_default_account_details
 		end
 		@open_account = Bank_account.new(account_details)
 	end
 	
-	def write_account_details_to_file(account)
-		io_file = File.open(account, 'w+')
-		io_file.write(open_account.details)
+	def write_account_details_to_file
+		io_file = File.open(@account_file, 'w+')
+		io_file.write(@open_account.details)
 		io_file.close
 	end
 	
@@ -58,7 +60,7 @@ class Machine
 	end
 	
 	def return_pin
-		open_account.pin
+		@open_account.pin
 	end
 	
 	def withdraw_funds
@@ -66,8 +68,8 @@ class Machine
 		amount = gets.chomp
 		if amount.valid_float?
 			amount = amount.to_f
-			if amount > 0 && open_account.check_withdrawal(amount)
-				open_account.withdraw(amount)
+			if amount > 0 && @open_account.check_withdrawal(amount)
+				@open_account.withdraw(amount)
 			elsif amount == 0
 				puts "You can\'t withdraw zero, please try again"
 			elsif amount < 0
@@ -86,7 +88,7 @@ class Machine
 		if amount.valid_float?
 			amount = amount.to_f
 			if amount > 0
-				open_account.deposit(amount)
+				@open_account.deposit(amount)
 			elsif amount == 0
 				puts "You can\'t deposit zero, please try again"
 			elsif amount < 0
@@ -102,7 +104,12 @@ class Machine
 	end
 	
 	def print_balance
-		open_account.show_balance
+		@open_account.show_balance
+	end
+	
+	def quit
+		write_account_details_to_file
+		exit
 	end
 
 end
