@@ -1,9 +1,6 @@
 #require 'rubygems'
 #require 'debugger'
 
-
-
-#Machine handles loading of bank details and starting and finishing
 #require_relative 'src/account'
 require_relative 'src/machine'
 
@@ -16,11 +13,6 @@ end
 
 
 my_machine = Machine.new('bank_account_details.txt')
-
-#account_file = 'bank_account_details.txt'
-#my_machine.load_account_details
-#open_account = Bank_account.new(my_machine.account_details)
-
 
 user_pin = my_machine.request_pin
 
@@ -57,9 +49,4 @@ while $user_option != :q
 	end
 end
 
-
-#Write new account details to file
 my_machine.quit
-
-
-
