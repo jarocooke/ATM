@@ -27,26 +27,20 @@ elsif user_pin == "q"
 	my_machine.quit
 end
 
-
-$user_option = :continue
-while $user_option != :q
-	if $user_option == :continue
-		my_machine.print_options
-		$user_option = gets.chomp.downcase.to_sym
-	end
-	if $user_option == :b
+loop do
+	my_machine.print_options
+	case gets.chomp.downcase.to_sym
+	when :b
 		my_machine.print_balance
-		$user_option = :continue
-	elsif $user_option == :d
+	when :d
 		my_machine.deposit_funds
-		my_machine.print_balance
-	elsif $user_option == :w
+		my_machine.print_balance		
+	when :w
 		my_machine.withdraw_funds
 		my_machine.print_balance
-	elsif $user_option != :q
+	when :q
+		my_machine.quit
+	else
 		puts "Not a valid command, please try again."
-		$user_option = :continue
 	end
 end
-
-my_machine.quit

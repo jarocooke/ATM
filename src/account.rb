@@ -18,14 +18,12 @@ class Bank_account
 		@balance = @balance.to_f - amount
 		@balance = @balance.to_s
 		puts "You have withdrawn £#{"%.2f" % amount}"
-		$user_option = :continue
 	end
 	
 	def deposit(amount)
 		@balance = @balance.to_f + amount
 		@balance = @balance.to_s
 		puts "You have deposited £#{"%.2f" % amount}"
-		$user_option = :continue
 	end
 	
 	def check_withdrawal(amount)
