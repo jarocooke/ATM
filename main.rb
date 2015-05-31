@@ -32,11 +32,11 @@ loop do
 	case gets.chomp.downcase.to_sym
 	when :b
 		my_machine.print_balance
-	when :d
-		my_machine.deposit_funds
+	when :d 
+		begin my_machine.deposit_funds rescue retry end
 		my_machine.print_balance		
 	when :w
-		my_machine.withdraw_funds
+		begin my_machine.withdraw_funds rescue retry end
 		my_machine.print_balance
 	when :q
 		my_machine.quit

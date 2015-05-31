@@ -26,8 +26,8 @@ class Bank_account
 		puts "You have deposited £#{"%.2f" % amount}"
 	end
 	
-	def check_withdrawal(amount)
-		amount <= @balance.to_f
+	def check_withdrawal_funds(value)
+		value <= @balance.to_f
 	end
 	
 	def details

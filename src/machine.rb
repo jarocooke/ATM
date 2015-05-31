@@ -66,36 +66,46 @@ class Machine
 	def withdraw_funds
 		puts "Enter amount to withdraw"
 		amount = gets.chomp
-		if amount.valid_float?
-			amount = amount.to_f
-			if amount > 0 && @open_account.check_withdrawal(amount)
-				@open_account.withdraw(amount)
-			elsif amount == 0
-				puts "You can\'t withdraw zero, please try again"
-			elsif amount < 0
-				puts "You can\'t withdraw a negative amount, please try again"
-			elsif check_withdrawal(amount) == false
-				puts "You don\'t have sufficient funds to make the withdrawal"
-			end
+		if check_withdrawal(amount)
+			@open_account.withdraw(amount.to_f)
 		else
+			raise
+		end
+	end
+	
+	def check_withdrawal(amount)
+		if amount.valid_float? == false
 			puts "You must enter a number for examle \"10.00\", please try again"
+		elsif amount.to_f == 0
+			puts "You can\'t withdraw zero, please try again"
+		elsif amount.to_f < 0
+			puts "You can\'t withdraw a negative amount, please try again"
+		elsif @open_account.check_withdrawal_funds(amount.to_f) == false
+			puts "You don\'t have sufficient funds to make the withdrawal"
+		elsif amount.to_f > 0
+			return true
 		end
 	end
 	
 	def deposit_funds
 		puts "Enter amount to deposit"
 		amount = gets.chomp
-		if amount.valid_float?
-			amount = amount.to_f
-			if amount > 0
-				@open_account.deposit(amount)
-			elsif amount == 0
-				puts "You can\'t deposit zero, please try again"
-			elsif amount < 0
-				puts "You can\'t deposit a negative amount, please try again"
-			end
+		if check_deposit(amount)
+			@open_account.deposit(amount.to_f)
 		else
+			raise
+		end
+	end
+	
+	def check_deposit(amount)
+		if amount.valid_float? == false
 			puts "You must enter a number for examle \"10.00\", please try again"
+		elsif amount.to_f == 0
+			puts "You can\'t deposit zero, please try again"
+		elsif amount.to_f < 0
+			puts "You can\'t deposit a negative amount, please try again"
+		elsif amount.to_f > 0
+			return true
 		end
 	end
 	
